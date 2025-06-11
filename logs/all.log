@@ -12,3 +12,17 @@
 2025-06-11 12:51:17,017 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - /openedx/venv/lib/python3.11/site-packages/boto/plugin.py:40: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
   import imp
 
+2025-06-11 13:31:01,441 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - <frozen importlib._bootstrap>:1047: ImportWarning: _SixMetaPathImporter.find_spec() not found; falling back to find_module()
+
+2025-06-11 13:31:01,442 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - <frozen importlib._bootstrap>:673: ImportWarning: _SixMetaPathImporter.exec_module() not found; falling back to load_module()
+
+2025-06-11 13:31:01,450 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - /openedx/venv/lib/python3.11/site-packages/boto/plugin.py:40: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
+  import imp
+
+2025-06-11 13:39:53,976 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - <frozen importlib._bootstrap>:1047: ImportWarning: _SixMetaPathImporter.find_spec() not found; falling back to find_module()
+
+2025-06-11 13:39:53,977 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - <frozen importlib._bootstrap>:673: ImportWarning: _SixMetaPathImporter.exec_module() not found; falling back to load_module()
+
+2025-06-11 13:39:53,987 WARNING 1 [py.warnings] [user None] [ip None] warnings.py:110 - /openedx/venv/lib/python3.11/site-packages/boto/plugin.py:40: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
+  import imp
+

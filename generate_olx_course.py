@@ -1,24 +1,40 @@
 import os
 import tarfile
+import re
 
-def create_olx_course(course_id, course_name, slides_dir, output_filename="course.tar.gz"):
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9\s-]', '', text)
+    text = re.sub(r'\s+', '-', text)
+    return text
+
+def create_olx_course(course_id_org, course_id_number, course_display_name, slides_dir, output_filename="course.tar.gz"):
     """
     Creates an OLX course package from markdown slides.
     Each slide becomes an HTML component within a course unit.
     """
     
+    course_id_run = slugify(course_display_name)
+    
+    full_course_key_string = f"{course_id_org}/{course_id_number}/{course_id_run}"
+
     # Base OLX structure
     olx_structure = {
-        f"{course_id}/course.xml": (
-            "<course url_name=\"{course_id}\" org=\"{course_id}\" course=\"{course_name}\" display_name=\"{course_name}\">\n"
-            "    <chapter url_name=\"Introduction\">\n"
-            "        <sequential url_name=\"Overview\">\n"
+        f"{course_id_org}/{course_id_number}/{course_id_run}/course.xml": (
+            "<course url_name=\"{course_id_run}\" org=\"{course_id_org}\" course=\"{course_id_number}\" display_name=\"{course_display_name}\">\n"
+            "    <chapter url_name=\"introduction\">\n"
+            "        <sequential url_name=\"overview\">\n"
             "        </sequential>\n"
             "    </chapter>\n"
             "</course>"
-        ).format(course_id=course_id, course_name=course_name),
-        f"{course_id}/chapter/Introduction.xml": "<chapter display_name=\"Introduction\"/>",
-        f"{course_id}/sequential/Overview.xml": "<sequential display_name=\"Overview\"/>",
+        ).format(
+            course_id_org=course_id_org,
+            course_id_number=course_id_number,
+            course_id_run=course_id_run,
+            course_display_name=course_display_name
+        ),
+        f"{course_id_org}/{course_id_number}/{course_id_run}/chapter/introduction.xml": "<chapter display_name=\"Introduction\"/>",
+        f"{course_id_org}/{course_id_number}/{course_id_run}/sequential/overview.xml": "<sequential display_name=\"Overview\"/>",
     }
 
     # Read slide content and create OLX HTML components
@@ -34,29 +50,33 @@ def create_olx_course(course_id, course_name, slides_dir, output_filename="cours
             
             # Convert markdown to basic HTML for OLX.
             # This is a very basic conversion; for complex markdown, consider a library.
-            html_content = str(f"<!DOCTYPE html>\n<html>\n<body>\n{content.replace('\n', '<br/>')}\n</body>\n</html>")
+            html_content = (
+                "<!DOCTYPE html>\n<html>\n<body>\n"
+                f"{content.replace('\n', '<br/>')}\n"
+                "</body>\n</html>"
+            )
 
-            unit_name = f"Slide_{i}"
-            html_component_name = f"slide_content_{i}"
+            unit_name_slug = slugify(f"Slide {i}")
+            html_component_name_slug = slugify(f"Slide Content {i}")
 
-            olx_structure[f"{course_id}/vertical/{unit_name}.xml"] = (
-                "<vertical display_name=\"{unit_name}\">\n"
-                "    <html url_name=\"{html_component_name}\"/>\n"
+            olx_structure[f"{course_id_org}/{course_id_number}/{course_id_run}/vertical/{unit_name_slug}.xml"] = (
+                "<vertical display_name=\"Slide {i}\">\n"
+                "    <html url_name=\"{html_component_name_slug}\"/>\n"
                 "</vertical>"
-            ).format(unit_name=unit_name, html_component_name=html_component_name)
+            ).format(i=i, html_component_name_slug=html_component_name_slug)
             
-            olx_structure[f"{course_id}/html/{html_component_name}.xml"] = (
-                "<html display_name=\"{unit_name}\">\n"
+            olx_structure[f"{course_id_org}/{course_id_number}/{course_id_run}/html/{html_component_name_slug}.xml"] = (
+                "<html display_name=\"Slide {i}\">\n"
                 "    <div markdown=\"1\">\n"
                 "        {html_content}\n"
                 "    </div>\n"
                 "</html>"
-            ).format(unit_name=unit_name, html_content=html_content)
+            ).format(i=i, html_content=html_content)
             
-            html_unit_refs.append("<vertical url_name=\"{unit_name}\"/>".format(unit_name=unit_name))
+            html_unit_refs.append("<vertical url_name=\"{unit_name_slug}\"/>".format(unit_name_slug=unit_name_slug))
 
     # Update sequential with unit references
-    olx_structure[f"{course_id}/sequential/Overview.xml"] = (
+    olx_structure[f"{course_id_org}/{course_id_number}/{course_id_run}/sequential/overview.xml"] = (
         "<sequential display_name=\"Overview\">\n"
         "    {html_unit_refs_joined}\n"
         "</sequential>"
@@ -73,13 +93,15 @@ def create_olx_course(course_id, course_name, slides_dir, output_filename="cours
             tar.add(temp_filepath, arcname=name)
             os.remove(temp_filepath) # Clean up temp file
 
-    print(f"OLX course '{course_name}' created as {output_filename}")
+    print(f"OLX course '{course_display_name}' created as {output_filename}")
+    print(f"Full Course ID for import and shell access: {full_course_key_string}")
 
 if __name__ == "__main__":
     current_dir = os.getcwd()
     create_olx_course(
-        course_id="BoostMeUp-LMS-PoC",
-        course_name="Boost Me Up LMS PoC Presentation",
+        course_id_org="BoostMeUp", 
+        course_id_number="LMS-PoC", 
+        course_display_name="Boost Me Up LMS PoC Presentation",
         slides_dir=current_dir,
         output_filename="boost_me_up_poc_course.tar.gz"
     ) 

@@ -1,0 +1,20 @@
+<problem display_name="TEST - Netwerken" markdown="Koppel de juiste eigenschap/term aan de juiste netwerkterm" showanswer="finished" weight="1.0">
+  <drag_and_drop_v2>
+    <drag_set>
+      <drag_item id="router">Router</drag_item>
+      <drag_item id="hub">Hub</drag_item>
+      <drag_item id="switch">Switch</drag_item>
+    </drag_set>
+    <drop_set>
+      <drop_target for="router">
+        <text>Gericht netwerkverkeer</text>
+      </drop_target>
+      <drop_target for="hub">
+        <text>Netwerken verbinden</text>
+      </drop_target>
+      <drop_target for="switch">
+        <text>Informatie verzenden en ontvangen</text>
+      </drop_target>
+    </drop_set>
+  </drag_and_drop_v2>
+</problem> 

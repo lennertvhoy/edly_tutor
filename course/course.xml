@@ -1,0 +1,5 @@
+<course url_name="it1education_lms_course" org="IT1" course="LMS-2025" display_name="IT1 Education LMS">
+  <chapter url_name="netwerken_chapter"/>
+  <chapter url_name="basisbegrippen_chapter"/>
+  <chapter url_name="windows_server_chapter"/>
+</course> 

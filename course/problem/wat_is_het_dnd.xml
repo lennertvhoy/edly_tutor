@@ -1,0 +1,24 @@
+<problem display_name="Wat is het?" markdown="Link het product aan de juiste categorie" showanswer="finished" weight="1.0">
+  <drag_and_drop_v2>
+    <drag_set>
+      <drag_item id="hard_disk">Hard Disk</drag_item>
+      <drag_item id="cpu">CPU</drag_item>
+      <drag_item id="invoerapparaat">Invoerapparaat</drag_item>
+      <drag_item id="ram">Ram</drag_item>
+    </drag_set>
+    <drop_set>
+      <drop_target for="cpu">
+        <text>AMD Ryzen 5 5600X</text>
+      </drop_target>
+      <drop_target for="hard_disk">
+        <text>Seagate 500GB</text>
+      </drop_target>
+      <drop_target for="ram">
+        <text>Crucial 16GB 2666MHz DDR4 SODIMM</text>
+      </drop_target>
+      <drop_target for="invoerapparaat">
+        <text>Logitech muis</text>
+      </drop_target>
+    </drop_set>
+  </drag_and_drop_v2>
+</problem> 

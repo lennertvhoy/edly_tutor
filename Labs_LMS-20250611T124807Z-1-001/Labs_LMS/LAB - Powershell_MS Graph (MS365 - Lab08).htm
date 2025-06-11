@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="nl"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="it1education">
+			<meta property="og:title" content="it1education">
+		<meta property="og:image" content="https://d3j0t7vrtr92dk.cloudfront.net/it1education/1605801922_LMS_IT1_25y%20%282%29.png">
+		<meta property="og:description" content="TalentLMS - Cloud based, Lean Learning Platform with an Emphasis on Usability and Easy Course Creation">
+		<!-- base href="https://it1education.talentlms.com/" -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="Content-Language" content="nl">
+	<meta charset="utf-8">
+	<meta name="keywords" content="lms, elearning, learning platform, cloud, saas">
+	<meta name="description" content="TalentLMS - Cloud based, Lean Learning Platform with an Emphasis on Usability and Easy Course Creation">
+			<title>LAB - Powershell/MS Graph (MS365 - Lab08)</title>
+	<link href="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/animate.min.css" rel="stylesheet" type="text/css">
+						<link href="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/fmt_1721818052,tn_53,tv_69,ct_1,rtl_0.css" rel="stylesheet" type="text/css">
+											<link href="https://d3j0t7vrtr92dk.cloudfront.net/it1education/1596033447_suru-qfor.png" rel="shortcut icon">
+					<script src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/main-560.min.js" type="text/javascript"></script>
+																									<link href="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/toastr.min.css" rel="stylesheet" type="text/css">
+		</head>
+<body class="tl-body">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid nav-container" id="tl-navigation-bar-handler">
+				<a class="btn btn-navbar hamburger hamburger--slider hamburger--small hamburger--collapse" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</a>
+				<a class="brand" href="https://it1education.talentlms.com/dashboard"><img src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/1605801921_LMS_IT1_25y%20(2).png" class="avatar-square"></a>
+				<div id="tl-loading-pane" class="hide affix text-center"><p><img src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/loading-small.gif" class="tl-loader-small"></p></div>
+				<div class="nav-collapse collapse">
+									<ul class="nav pull-right">
+																	
+												<li class="dropdown" id="tl-cms-page-dropdown-more" style="">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Meer&nbsp;<b class="caret"></b></a>
+							<ul class="dropdown-menu"><li class="tl-cms-page" style="" id="tl-cms-menu-entry-8"><a href="https://www.it1.be/opleidingen" target="_blank"><span title="Over ons">Over ons</span></a></li></ul>
+						</li>
+						<li class="divider-vertical" style="margin-left: 0px; margin-right: 1px;"></li>
+																																		<li class="dropdown" id="tl-dropdown-roles">
+								<a href="#" class="dropdown-toggle tl-nabvar-roles-button" data-toggle="dropdown">
+									<span title="L. Van Hoyweghen">L. Van Hoyweghen</span>									 | <b>Docent</b>									&nbsp;
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+																																									<li id="tl-trainer-option" class="tl-role-change-btn">
+												<a href="https://it1education.talentlms.com/dashboard/index/role:trainer" class="active">
+																										<i class="tl-select-icon-selected"></i>
+													Docent												</a>
+											</li>
+																																<li id="tl-learner-option" class="tl-role-change-btn">
+												<a href="https://it1education.talentlms.com/dashboard/index/role:learner" class="">
+																										<i class="tl-select-icon"></i>
+													Cursist												</a>
+											</li>
+																																																	<li class="divider"></li>
+																															<li id="tl-myinfo-option">
+												<a href="https://it1education.talentlms.com/user/info/id:208">
+													<i class="tl-icon16 icon-address-card"></i>
+													Mijn informatie												</a>
+											</li>
+																					<li id="tl-mycourses-option">
+												<a href="https://it1education.talentlms.com/user/courses/id:208">
+													<i class="tl-icon16 icon-book"></i>
+													Mijn cursussen												</a>
+											</li>
+																					<li id="tl-mycertifications-option">
+												<a href="https://it1education.talentlms.com/reports/userinfo/id:208#certifications">
+													<i class="tl-icon16 icon-trophy"></i>
+													Mijn certificaten												</a>
+											</li>
+																					<li id="tl-myprogress-option">
+												<a href="https://it1education.talentlms.com/reports/userinfo/id:208">
+													<i class="tl-icon16 icon-user-chart"></i>
+													Mijn voortgang												</a>
+											</li>
+																					<li id="tl-mygroups-option">
+												<a href="https://it1education.talentlms.com/user/groups/id:208">
+													<i class="tl-icon16 icon-users"></i>
+													Mijn groepen												</a>
+											</li>
+																					<li id="tl-mybranches-option">
+												<a href="https://it1education.talentlms.com/user/branches/id:208">
+													<i class="tl-icon16 icon-split"></i>
+													Mijn afdelingen												</a>
+											</li>
+																					<li id="tl-myfiles-option">
+												<a href="https://it1education.talentlms.com/user/files/id:208">
+													<i class="tl-icon16 icon-doc-alt-1"></i>
+													Mijn bestanden												</a>
+											</li>
+																												                                    										<li class="nav-header tl-role-change-btn" style="margin-top:17px">
+											New interface										</li>
+										<li class="tl-role-change-btn">
+											<a href="https://it1education.talentlms.com/autologin/plus">
+												<i class="tl-icon16 icon-bullhorn-regular"></i>
+                                                Probeer het nu											</a>
+										</li>
+                                    								</ul>
+							</li>
+																																					<li class="dropdown" id="tl-dropdown-messages">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Berichten&nbsp;<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="https://it1education.talentlms.com/message">
+										<i class="tl-icon16 icon-inbox"></i>Ga naar inbox									</a>
+								</li>
+																<li>
+									<a href="https://it1education.talentlms.com/message/create">
+										<i class="tl-icon16 icon-mail-1"></i>Verstuur bericht									</a>
+								</li>
+																<li class="divider"></li>
+																<li><a href="javascript:void(0)">Geen berichten </a></li>
+															</ul>
+						</li>
+																						<li class="hidden-phone" id="tl-dropdown-help"><a id="tl-goto-help" href="https://it1education.talentlms.com/help">Help</a></li>
+																																<li class="divider-vertical spotlight-divider" style="margin-left: 0px;"></li>
+					<li class="dropdown open hidden-phone hidden-tablet">
+						<div class="tl-can-clear-input" style="margin-top: 10px;">
+							<input id="tl-spotlight" autocomplete="off" class="tl-nav-spotlight ui-autocomplete-input" placeholder="Zoeken" type="text">
+							<div class="tl-clear-input-btn">
+								<i class="icon-remove"></i>
+							</div>
+						</div>
+					</li>
+					<li class="divider-vertical spotlight-divider" style="margin-right: 0px;"></li>
+						<li class="hidden-desktop" id="tl-navbar-logout" style="">
+							<a id="navbar-logout" href="https://it1education.talentlms.com/index/logout/token:6949">
+								Afmelden							</a>
+						</li>
+						<li class="hidden-tablet hidden-phone" id="tl-navbar-logout-icon"><a id="navbar-logout" href="https://it1education.talentlms.com/index/logout/token:6949"><i class="icon-logout nav-logout" title="Afmelden"></i></a></li>
+					</ul>
+				
+								</div>
+			</div>
+		</div>
+	</div>
+<div id="preview_modal_nav" class="modal fade preview-modal hide" tabindex="-1"></div>
+
+<script defer="defer" type="text/javascript">
+	class ZeWidgetWrapper {
+		constructor(hasChatSupport, hasPhoneSupport) {
+			this.hasChatSupport = hasChatSupport;
+			this.hasPhoneSupport = hasPhoneSupport;
+		}
+
+		openChannel(channel) {
+
+			if (channel === 'chat' && this.hasChatSupport) {
+				zE('webWidget', 'updateSettings', this._getSingleChannelSettings('chat'))
+				this.openAndShow()
+			} else if (channel === 'talk' && this.hasPhoneSupport) {
+				zE('webWidget', 'updateSettings', this._getSingleChannelSettings('talk'))
+				this.openAndShow()
+			}
+		}
+
+		_getSingleChannelSettings(channel) {
+			const defaultWidgetSettings = {
+				helpCenter: {'suppress': true},
+				contactForm: {'suppress': true},
+				talk: {'suppress': true},
+				answerBot: {'suppress': true},
+				chat: {'suppress': true}
+			};
+
+			defaultWidgetSettings[channel].suppress = false;
+
+			return defaultWidgetSettings;
+		}
+
+		openAndShow() {
+			zE('webWidget', 'open');
+			zE('webWidget', 'show');
+		}
+
+		closeAndHide() {
+			zE('webWidget', 'close');
+			zE('webWidget', 'hide');
+		}
+
+	}
+
+	// Create a new instance of the ZeWidgetWrapper class
+	const zeWidgetWrapper = new ZeWidgetWrapper(true, true);
+
+
+
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+				var waitForFinalEvent = (function(){
+			var timers = {};
+			return function(callback, ms, uniqueId){
+
+				if(!uniqueId){
+					uniqueId = "uniqueId";
+				}
+
+				if(timers[uniqueId]){
+					clearTimeout(timers[uniqueId]);
+				}
+				timers[uniqueId] = setTimeout(callback, ms);
+			};
+		})();
+
+		$(window).resize(function(){
+			if($(window).width() > 980){
+				$('.nav-collapse li.tl-cms-page').hide();
+			}
+			$('#tl-cms-page-dropdown-more').hide();
+			waitForFinalEvent(function(){
+				buildCmsMenu();
+			}, 500, "...");
+		});
+		buildCmsMenu();
+		
+		
+		
+						$.ui.autocomplete.prototype._renderItemData = function(ul, item){
+			var regex = new RegExp("" + safeRegexString(myportal.app.escapeHtml(this.term)), "i");
+			var term = item.label.replace(regex, "<span style='font-weight: 600;'>" + "$&" + "</span>");
+			if (item.highlightDetails){
+				var details = item.details.replace(regex, "<span style='font-weight: 600;'>" + "$&" + "</span>");
+			}
+			else{
+				var details = item.details;
+			}
+			var imageUrl = item.imageUrl;
+			var imageClass = item.imageClass;
+			if(imageUrl){
+				if(item.fileType){
+					var illustrationTag = '<span class="label file-type-label file-type-label--' + item.fileCategory + '">' + item.fileType + '</span>';
+				}
+				else{
+					var illustrationTag = '<img class="avatar-square image40x40 tl-nav-spotlight-image" src="' + imageUrl + '"> ';
+				}
+			}
+			else if(imageClass){
+				var illustrationTag = 	'<div class="tl-icons-block"> ' +
+											'<span class="tl-icon-stack"> ' +
+												'<i class="icon-circle tl-icon-stack-background tl-spotlight-option-icon-background"></i> ' +
+												'<i class="'+ item.imageClass +' tl-icon-stack-content"></i>' +
+											'</span>' +
+										'</div>';
+			}
+
+			if(!item.virtual){ // Normal search result item
+				return $("<li></li>")
+					.addClass("tl-spotlight-result-item")
+				 	.data("ui-autocomplete-item", item)
+				 	.printTestId('spotlight-result-'+item.category.toLowerCase()+'-'+item.id)
+				 	.append('<div class="tl-spotlight-result-item_icon">' + illustrationTag + '</div>' +
+							'<div class="tl-spotlight-result-item_text">' +
+								'<div class="tl-spotlight-result-item_title">' + term + '</div>' +
+								'<div class="tl-spotlight-result-item_details">' + details + '</div>' +
+							'</div>')
+					.appendTo(ul);
+			}
+			else if(item.type === 'no_results'){
+				return $('<li data-ui-autocomplete-item="" class="text-center tl-empty-result tl-nav-spotlight-no-results">')
+				.data("ui-autocomplete-item", item)
+				 .append('<div><img src="https://d3j0t7vrtr92dk.cloudfront.net/images/empty_states/noSearchBox.svg" class="tl-nav-spotlight-no-results-img"></div>' +
+						 '<div><h3>O nee. Er werd niets gevonden.</h3></div>' +
+						 '<div>Gebruik een andere term en probeer opnieuw.</div>')
+				 .appendTo(ul);
+			}
+			else{ // "View detailed results" item
+				return $('<li data-ui-autocomplete-item="" class="text-center tl-nav-spotlight-view-all">')
+					.data("ui-autocomplete-item", item)
+				 	.append( '<a href="' + item.url + '" ' + window.printTestId('spotlight-view-all') + ' >' +
+								'<i class="icon-search"></i>' + item.label +
+							'</a>')
+					.appendTo(ul);
+			}
+
+		};
+
+		$.widget("custom.spotlightautocomplete", $.ui.autocomplete, {
+			_create: function(){
+				this._super();
+				this.widget().menu("option", "items", "> :not(.tl-spotlight-category)");
+			},
+			_renderMenu: function(ul, items){
+				var self = this;
+				var currentCategory = "";
+				ul.addClass('dropdown-menu tl-spotlight-dropdown');
+				$.each(items, function(index, item){
+					var li;
+					var itemsLength = items.length;
+					if(index < 8 || index === itemsLength - 1){ // Last item is the "View detailed results"
+						if(item.category !== currentCategory && item.category !== ''){
+							ul.append("<li class='tl-spotlight-category'>" + item.category + "</li>");
+							currentCategory = item.category;
+						}
+						li = self._renderItemData(ul, item);
+						if(item.category){
+							li.attr("aria-label", item.category + " : " + item.label);
+						}
+					}
+				});
+			},
+			_resizeMenu: function() {
+				//resize menu
+			}
+		});
+
+		var spotlightLastResults = {}; // Contains the last results fetched by spotlight.
+
+		$('#tl-spotlight').spotlightautocomplete({
+			minLength: 2,
+			source: function(request, response){
+				if(spotlightLastResults[ request.term ]){
+					response(spotlightLastResults[ request.term ]);
+					return;
+				}
+
+				var url = 'https://it1education.talentlms.com/index/spotlight/term:###term###';
+
+				request.term = request.term.replace("/", "%1A");
+				myportal.app.ajax(url.replace('###term###', encodeURIComponent(request.term)), {
+					success: function(data){
+						var results = $.map(data, function(item){
+							return {
+								id: item.id,
+								label: item.label,
+								url: item.url,
+								category: item.category,
+								imageUrl: item.imageUrl,
+								imageClass: item.imageClass,
+								details: item.details,
+								fileType: item.fileType,
+								fileCategory: item.fileCategory,
+								modalPreview: item.modalPreview,
+								highlightDetails: item.highlightDetails,
+								term: request.term
+							}
+						});
+
+						request.term = encodeURI(request.term.replace(/'/g, "%27"));
+
+						// Push "View detailed results" item.
+						var url = 'https://it1education.talentlms.com/index/results/term:###term###';
+						url = url.replace('###term###', request.term);
+
+						if(!results.length){
+							results.push({ // "No Results Found" item
+											 virtual: true, // Indicate that this is not a real search result item.
+											 label: '',
+											 term: '',
+											 url: '',
+											 id: 0,
+											 category: '',
+											 type: 'no_results',
+										 });
+						}
+						else{
+							results.push({ // "View Detailed Results" item
+											 virtual: true, // Indicate that this is not a real search result item.
+											 label: 'Detailresultaten bekijken',
+											 term: request.term,
+											 url: url,
+											 id: 0,
+											 category: '',
+											 type: 'view_detailed_results',
+										 });
+						}
+
+						spotlightLastResults = { // Re-initialise variable to delete old data.
+							[request.term]: results
+						};
+						response( results );
+					},
+					dataType: "json",
+					error: function(){
+						myportal.app.notify({type: "error", message: "Some error occurred"});
+					}
+				});
+			},
+			select: function(event, ui){
+				$('#tl-spotlight').val(ui.item.label);
+				if (ui.item.modalPreview){
+					event.preventDefault();
+					var action = ui.item.url;
+					if (typeof (action) != 'undefined') {
+						parameters = {
+							type : 'GET',
+							url : action,
+							success : function(data) {
+								$("#preview_modal_nav").empty().append(data);
+								$("#preview_modal_nav").modal();
+								$('#tl-loading-pane').hide();
+							}
+						};
+						myportal.app.ajax(action, parameters);
+					}
+				}
+				else{
+					window.location = ui.item.url;
+				}
+				return false;
+			},
+			focus: function(event, ui){
+				event.preventDefault();
+			},
+			position: { my : "right top", at: "right bottom"  },
+			open : function(){
+				$(".ui-autocomplete:visible").css({top:"+=10"});
+			},
+		});
+
+		$(window).resize(function(){
+			if($('.tl-spotlight-dropdown').css('display') === 'block'){
+				$('#tl-spotlight').spotlightautocomplete('search');
+			}
+		});
+
+				// Auto open header menus
+		$('#tl-dropdown-roles, #tl-dropdown-messages, #tl-dropdown-help, #tl-dropdown-goto, #tl-cms-page-dropdown-more').mouseenter(function(e){
+			if (!$(this).hasClass('open') && $(window).width() >= 980){
+				$(this).addClass("open autoopened");
+			}
+		});
+		$('#tl-dropdown-roles, #tl-dropdown-messages, #tl-dropdown-help, #tl-dropdown-goto, #tl-cms-page-dropdown-more').mouseleave(function(){
+			if ($(this).hasClass('open') && $(this).hasClass('autoopened')){
+				$(this).removeClass("open autoopened");
+			}
+		});
+		//empty #preview_modal_nav on close so that videos/audio stop playing
+		$('#preview_modal_nav').bind('hidden', function (){
+			$('#preview_modal_nav').html('');
+		});
+	});
+
+	
+	function buildCmsMenu(){
+		$('#tl-cms-page-dropdown-more .dropdown-menu li').each(function(){
+			$('#tl-cms-page-dropdown-more').before($(this));
+		});
+
+		$('#tl-cms-page-dropdown-more').hide();
+
+		if($(window).width() < 980){
+			$('.nav-collapse li.tl-cms-page').fadeIn(100);
+			return;
+		}
+
+		var availableNavSpace = $('.nav-collapse').width();
+   		var cmsMenuEntriesSpace = 0;
+   		$('.nav-collapse li:not(.tl-cms-page)').each(function(){  availableNavSpace -= $(this).outerWidth(true); });
+   		availableNavSpace -= $('.brand').outerWidth(true);
+   		$('.nav-collapse li.tl-cms-page').each(function(){ cmsMenuEntriesSpace += $(this).outerWidth(true);});
+
+   		if(cmsMenuEntriesSpace > availableNavSpace){
+   			$('#tl-cms-page-dropdown-more').fadeIn(100);
+   			$('#tl-cms-page-dropdown-more-divider').fadeIn(100);
+   			availableNavSpace -= $('#tl-cms-page-dropdown-more').outerWidth(true);
+
+   			if($('#tl-cms-page-dropdown-more-divider').outerWidth(true)){
+				availableNavSpace -= $('#tl-cms-page-dropdown-more-divider').outerWidth(true);
+			}
+   		}
+
+   		var firstIteration = true;
+   		cmsMenuEntriesSpace = 0;
+
+   		$('.nav-collapse li.tl-cms-page').each(function(index){
+			cmsMenuEntriesSpace += $(this).outerWidth(true);
+
+   			if(cmsMenuEntriesSpace > availableNavSpace){
+   				$(this).appendTo('#tl-cms-page-dropdown-more .dropdown-menu');
+   			}
+   			else{
+   	   			if(firstIteration){
+   					$(this).parent('.nav-collapse').prependTo('.nav-collapse ul[class!="dropdown-menu"]');
+   					firstIteration = false;
+   	   			}
+   				else{
+   					$(this).parent('.nav-collapse li.tl-cms-page').eq(index-1).after($(this));
+   				}
+   			}
+   		});
+   		$('.nav-collapse li.tl-cms-page').fadeIn(100);
+	}
+</script>
+
+<script id="tl-template-upload-ticket" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+	<tr class="template-upload fade">
+		<td>
+			<strong class="error text-danger"></strong>
+			<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div class="bar bar-success progress-bar progress-bar-success" style="width: 0%;"></div>
+			</div>
+		</td>
+	</tr>
+{% } %}
+</script>
+
+<script id="success-template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+	<tr class="template-upload fade">
+		<td>
+			<strong class="error text-danger"></strong>
+			<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div class="bar bar-success progress-bar progress-bar-success" style="width: 0%;"></div>
+			</div>
+		</td>
+	</tr>
+{% } %}
+</script>
+
+<div class="container ">
+						
+	
+	
+	<div class="row">
+				<div class="span12">			<div class="tl-title tl-ellipsis"><span class="tl-box-title-options"><a href="https://it1education.talentlms.com/dashboard" title="Home">Home</a><span>&nbsp;/&nbsp;</span></span><span title="LAB - Powershell/MS Graph (MS365 - Lab08)" class="tl-formatted-course-name">LAB - Powershell/MS Graph <span class="tl-formatted-course-code">(MS365 - Lab08)</span></span></div>
+		<div class="tl-box tl-box-border ">
+			<div class="row">
+				<div class="span12">
+<div class="tl-content-full course-info_wrapper" style="padding: 10px;">
+	<div class="span3 text-center padded course-info_avatar--wrap">
+		<img class="avatar-square catalog-course-logo course-info_avatar--img animated fadeIn" src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/1719475768_OIP.png" alt="LAB - Powershell/MS Graph (MS365 - Lab08)" title="LAB - Powershell/MS Graph (MS365 - Lab08)"><br><br>
+				<a class="btn btn-primary btn-large" href="https://it1education.talentlms.com/learner/course/id:626">
+							Ga verder met cursus					</a>
+			</div>
+	<div class="span8 course-info_main">
+		<h2>
+			<span title="LAB - Powershell/MS Graph (MS365 - Lab08)" class="tl-formatted-course-name">LAB - Powershell/MS Graph <span class="tl-formatted-course-code">(MS365 - Lab08)</span></span>			<span class="pull-right">
+									<span class="label label-progress tl-label-progress" title="Voortgang"><span style="width:21.5px;" class="label label-success">43%</span></span>
+							</span>
+		</h2>
+				<div id="tl-course-rating">
+						<div id="courserating" class="average-rating tl-cursor-pointer rateit" data-rateit-value="" data-course-id="626" data-url="https://it1education.talentlms.com/course/setrating"><div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" style="width: 80px; height: 16px;" aria-readonly="false"><div class="rateit-selected" style="height: 16px; width: 0px;"></div><div class="rateit-hover" style="height:16px"></div></div><div class="button-wrapper"><button id="rateit-reset-2" type="button" title="Rating resetten" data-role="none" class="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2"></button></div></div>
+			<span class="tl-course-user-rating-info" style="display: none">Je beoordeling: <span class="tl-course-user-rating-info-value"></span> <span class="tl-course-user-rating-info-star"></span></span>
+					</div>
+				<br class="hidden-phone">
+		<div style="margin-top: 5px;">
+						<fieldset>
+				<legend class="course-info_main--desc-label">Beschrijving</legend>
+				<div class="tl-course-catalog-course-description course-info_main--desc">Connect
+ via PowerShell (PS) Leer hoe je verbinding maakt met Microsoft 365 via 
+PowerShell. Dit is essentieel voor het uitvoeren van beheertaken en 
+automatisering binnen je Microsoft 365 omgeving.<br><br>Enkele 
+PowerShell CmdLets Voer enkele veelgebruikte PowerShell cmdlets uit om 
+Microsoft 365 te beheren. Dit omvat taken zoals het maken en beheren van
+ gebruikers, groepen, en licenties.<br><br>Connect Graph Eplorer Maak 
+verbinding met de Microsoft Graph Explorer. Deze tool stelt je in staat 
+om API-aanroepen te maken naar Microsoft Graph, wat je toegang geeft tot
+ een breed scala aan gegevens en diensten binnen Microsoft 365.<br><br>Graph via PowerShell <br>Leer
+ hoe je Microsoft Graph API kunt gebruiken via PowerShell. Dit stelt je 
+in staat om geavanceerde beheer- en automatiseringstaken uit te voeren 
+door middel van scriptgebaseerde API-aanroepen.</div>
+				<div class="course-info_main--show-more hide">
+					<button type="button" class="btn btn-link course-info_main--desc-more">lees meer</button>
+				</div>
+											</fieldset>
+						<fieldset>
+				<legend>Inhoud </legend>
+								<ul class="tl-unit-list tl-catalog-left-space" id="tl-course-info-units-list">
+																					<li><a class="none-decoration tl-course-info-unit" href="javascript:void(0);" title="Tijd:  16s | Afgerond op: 02/07/2024, 11:27" data-placement="right" data-container="#tl-course-info-units-list"><i class="icon-ok tl-green-ok tl-icon16 tl-gray-icon" style="margin-right: 8px;"></i></a><a href="https://it1education.talentlms.com/unit/view/id:16738">Inhoud oefening</a></li>
+																									<li><a class="none-decoration tl-course-info-unit" href="javascript:void(0);" title="Tijd:  3m 55s | Afgerond op: 02/07/2024, 11:31" data-placement="right" data-container="#tl-course-info-units-list"><i class="icon-ok tl-green-ok tl-icon16 tl-gray-icon" style="margin-right: 8px;"></i></a><a href="https://it1education.talentlms.com/unit/view/id:11407">Connect via PS</a></li>
+																									<li><a class="none-decoration tl-course-info-unit" href="javascript:void(0);" title="Tijd:  1m 4s | Afgerond op: 02/07/2024, 11:32" data-placement="right" data-container="#tl-course-info-units-list"><i class="icon-ok tl-green-ok tl-icon16 tl-gray-icon" style="margin-right: 8px;"></i></a><a href="https://it1education.talentlms.com/unit/view/id:11408">Enkele PS Command-Lets</a></li>
+																									<li><i class="icon-doc-alt tl-icon16 tl-gray-icon tl-cursor-default" style="margin-right: 8px;"></i><a href="https://it1education.talentlms.com/unit/view/id:11409">Connect Graph Explorer</a></li>
+																									<li><i class="icon-doc-alt tl-icon16 tl-gray-icon tl-cursor-default" style="margin-right: 8px;"></i><span class="tl-disabled">Graph via Powershell</span></li>
+																									<li><i class="icon-doc-alt tl-icon16 tl-gray-icon tl-cursor-default" style="margin-right: 8px;"></i><span class="tl-disabled">Extra</span></li>
+																									<li><i class="icon-doc-alt tl-icon16 tl-gray-icon tl-cursor-default" style="margin-right: 8px;"></i><span class="tl-disabled">Einde</span></li>
+												</ul>
+							</fieldset>
+
+			
+						<fieldset>
+				<legend>Voltooiingsregels</legend>
+				<ul class="tl-unit-list tl-catalog-left-space">
+									<li><i class="icon-flag tl-icon16 tl-gray-icon tl-cursor-default tl-course-info-icon"></i>Alle onderdelen moeten voltooid zijn</li>
+												</ul>
+			</fieldset>
+								</div>
+		<div class="form-actions" style="background: transparent;">
+			<i class="icon-chevron-left pull-left tl-cursor-default tl-return-to-catalog-from-course-info" style="margin-left: 5px; margin-right: 5px;"></i><a class="pull-left tl-return-to-catalog-from-course-info" href="https://it1education.talentlms.com/dashboard/index">Terug</a>
+		</div>
+	</div>
+</div>
+
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if($('#tl-course-rating').length){
+			$('#courserating').rateit({ max: 5, step: 1 });
+		}
+
+		showCourseDescriptionMore();
+	});
+</script>
+			</div>	</div>
+	
+			<footer class="footer text-right">
+					</footer>
+		<div id="secured_site_modal" class="modal fade secured-site-modal hide" tabindex="-1">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3 class="secured-site-modal_header">
+					Dit is een beveiligde site 				</h3>
+			</div>
+			<div class="modal-body">
+				<div class="secured-site-modal_img-container">
+					<a href="http://www.positivessl.com/" class="none-decoration" target="_blank" title="SSL Certificate Authority">
+						<img src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/secured-site-header.png" alt="SSL Certificate Authority" title="SSL Certificate Authority">
+					</a>
+				</div>
+				<div class="secured-site-modal_text">
+					<p>
+						Een beveiligde site is een website die wordt beschermd tegen 
+nieuwsgierige blikken. Wanneer informatie heen en weer gaat tussen onze 
+server en uw computer, wordt alle informatie gecodeerd. Dat betekent dat
+ als iemand zou 'luisteren' en deze gegevens te zien, ze niet in staat 
+zijn om te decoderen of te lezen wat het betekent.					</p>
+					<p>
+						it1education gebruikt deze beveiliging (SSL genoemd) op de hele site en alle subdomeinen om ervoor te zorgen dat <b> uw persoonlijke informatie alleen voor uzelf toegankelijk is </b>.					</p>
+				</div>
+			</div>
+		</div>
+		<div id="tl-gamification-points-message" class="hide hidden-phone text-center tl-bold-item"></div>
+	<div id="tl-gamification-badges-message" class="hide hidden-phone">
+		<div class="tl-badge-image-message-wrapper">
+			<img class="tl-badge-image pull-left image60x60">
+			<div class="tl-badge-message text-center tl-bold-item"></div>
+		</div>
+	</div>
+</div>
+
+	<div class="modal fade hide" id="tl-export-to-csv-modal" style="outline: none;" tabindex="-1">
+		<div class="modal-header"><h3>Sla op als CSV-bestand</h3></div>
+		<div class="modal-body">
+			<div class="text-center">Exportbestand wordt gemaakt. Even geduld..</div>
+			<div class="progress progress-striped progress-success active" style="margin: 15px 0px;">
+				<div class="bar" style="width: 100%;"></div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="pull-left span4 text-left hide" style="margin: 0px 5px 0px 0px;">
+				<span>Even geduld terwijl de opdracht geannuleerd wordt</span>
+			</div>
+			<div class="pull-right">
+				<a href="javascript:void(0)" class="btn" id="tl-cancel-export">Annuleer</a>
+			</div>
+		</div>
+	</div>
+	<div id="tl-export-to-csv-token" class="hide"></div>
+
+<div class="modal fade hide" id="tl-confirm" style="outline: none;" tabindex="-1">
+	<div class="modal-header">
+		<a href="javascript:void(0)" class="close" data-dismiss="modal">×</a>
+		<h3 class="tl-modal-header">Opmerking</h3>
+	</div>
+	<div class="modal-body"><p id="tl-modal-body"></p></div>
+	<div class="modal-footer">
+		<a id="tl-confirm-submit" class="btn btn-danger"><i class="icon-trash"></i>&nbsp;Verwijderen</a>
+		<a id="tl-confirm-continue" class="btn btn-danger hide"><i class="icon-trash"></i>&nbsp;Verwijder, vraag niet opnieuw </a>
+		<a class="btn" data-dismiss="modal">Annuleer</a>
+	</div>
+</div>
+<div class="modal fade hide" id="tl-confirm-double" style="outline: none;" tabindex="-1">
+	<div class="modal-header">
+		<a href="javascript:void(0)" class="close" data-dismiss="modal">×</a>
+		<h3 class="tl-modal-header-double">Opmerking</h3>
+	</div>
+	<div class="modal-body"><p id="tl-modal-body-double"></p></div>
+	<div class="modal-footer">
+		<a id="tl-confirm-submit-double" class="btn btn-danger"><i class="icon-trash"></i>&nbsp;Verwijderen</a>
+		<a id="tl-confirm-submit-double2" class="btn btn-danger"></a>
+		<a class="btn" data-dismiss="modal">Annuleer</a>
+	</div>
+</div>
+<div class="modal fade hide" id="tl_leavepage_confirm" style="outline: none;" tabindex="-1">
+	<div class="modal-header">
+		<a href="javascript:void(0)" class="close" data-dismiss="modal">×</a>
+		<h3>Opmerking</h3>
+	</div>
+	<div class="modal-body"><p></p></div>
+	<div class="modal-footer">
+		<a id="tl-leavepage" class="btn btn-danger"><i class="icon-trash"></i>&nbsp;Maak wijzigingen ongedaan</a>
+		<a class="btn" data-dismiss="modal">Annuleer</a>
+	</div>
+</div>
+
+
+<div class="modal fade hide" id="tl-relogin-modal" style="outline: none;" tabindex="-1">
+	<div class="modal-header text-center">
+		<h3>Even voor de zekerheid, u bent nu uitgelogd</h3>
+	</div>
+	<div class="modal-body">
+		<div class="text-center" style="padding: 10px 0px;">
+			<img src="LAB%20-%20Powershell_MS%20Graph%20(MS365%20-%20Lab08)_files/lockout.svg">
+			<div style="margin-top: 15px;">Voer uw wachtwoord in om verder te gaan waar u was gebleven</div>
+			<form name="tl-relogin-form" method="post" action="https://it1education.talentlms.com/learner/courseinfo/id:626" class="tl-form form-horizontal" id="tl-relogin-form" data-submiturl="https://it1education.talentlms.com/index/relogin" data-bitwarden-watching="1"><input type="hidden" name="_track_tl-relogin-form" value="1721821487" class="" id="1533021524"><input type="hidden" name="_redirect_" value="" class="" id="_redirect_"><input type="hidden" name="_myToken" value="24b7fdd82bcd3a6e43c93c467352b53b" class="" id="_myToken"><input type="hidden" name="appear_as_supervisor_after_relogin" value="" class="" id="404078444"><input type="hidden" name="relogin_role" value="trainer" class="" id="1449142962"><input type="hidden" name="relogin_username" value="l.vanhoyweghen" class="" id="1958058479">			<div class="control-group ">
+				<div class="controls">
+					<input type="password" name="relogin_password" value="" class="span4" id="1508542026" placeholder="wachtwoord" autocomplete="off" tabindex="">					<span class="help-block"></span>
+				</div>
+			</div>
+			<input type="submit" name="submit_relogin" value="Login" class="btn btn-primary" id="131409853" data-loading-text="Inloggen..." tabindex="">			</form>			<div><a href="https://it1education.talentlms.com/index">Uitloggen</a></div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$('body').on('touchstart.dropdown', '.dropdown-menu', function(e){ e.stopPropagation(); });	// Fix for https://github.com/twitter/bootstrap/issues/2975#issuecomment-6659992, should be removed if fixed in twitter bs 2.1.2 (or whenever)
+	myportal.app.translations['search'] = "Zoeken";
+	myportal.app.translations['Completed'] = "Voltooid";
+	myportal.app.translations['cancel'] = "Annuleer";
+	myportal.app.translations['ok'] = "Oké";
+	myportal.app.translations['save'] = "Sla op";
+	myportal.app.translations['save-as-new'] = "Opslaan als nieuw ";
+	myportal.app.translations['more'] = "meer";
+	myportal.app.translations['less'] = "minder";
+	myportal.app.translations['remove'] = "Verwijder";
+	myportal.app.translations['reset'] = "Reset";
+	myportal.app.translations['refresh'] = "Vernieuwen ";
+	myportal.app.translations['notice'] = "Opmerking";
+	myportal.app.translations['reset-remove-certification'] = "Rest & verwijder certificaat";
+	myportal.app.translations['activate'] = "activeren";
+	myportal.app.translations['deactivate'] = "deactiveren";
+	myportal.app.translations['search-courses'] = "Zoek cursussen ";
+	myportal.app.translations['add-image'] = "Voeg afbeelding toe";
+	myportal.app.translations['change-image'] = "Wijzig afbeelding";
+	myportal.app.translations['accepted-files'] = "Geaccepteerde bestanden ";
+	myportal.app.translations['max-file-size'] = "Maximum bestandsgrootte ";
+	myportal.app.translations['switch-editor'] = "Schakel tussen HTML en bronscherm ";
+	myportal.app.translations['grid-more-results'] = "Toon meer resultaten per pagina ";
+	myportal.app.translations['grid-less-results'] = "Toon minder resultaten per pagina ";
+	myportal.app.translations['image-course-files'] = "Gebruik een afbeelding uit de cursusbestanden ";
+	myportal.app.translations['use-image-url'] = "Gebruik een afbeelding URL (http://...)";
+	myportal.app.translations['width'] = "Breedte";
+	myportal.app.translations['padding'] = "Opvulling";
+	myportal.app.translations['align-default'] = "Uitlijnen (standaard)";
+	myportal.app.translations['align-left'] = "Plaats links ";
+	myportal.app.translations['align-right'] = "Plaats rechts ";
+	myportal.app.translations['make-changes'] = "Bewaar wijzigingen ";
+	myportal.app.translations['grid-start-end-total'] = "_START_ tot _END_ van _TOTAL_";
+	myportal.app.translations['matrix-of-total'] = "van _TOTAL_";
+	myportal.app.translations['matrix-more-less-results'] = "Toon meer/minder resultaten per pagina";
+	myportal.app.translations['matrix-search-input-threshold'] = "Gebruik 3+ karakters";
+	myportal.app.translations['search-users'] = "Zoek gebruikers";
+	myportal.app.translations['export'] = "Exporteer";
+	myportal.app.translations['save-as-csv'] = "Sla op als CSV-bestand";
+	myportal.app.translations['active-file-upload'] = "Er is een actief bestandsupload overdracht bezig";
+	myportal.app.translations['upload-leave-page'] = "Weet je zeker dat je deze pagina wilt verlaten? Bestand upload zal stoppen en alle geüploadde data zal verloren gaan. ";
+	myportal.app.translations['unsaved-changes'] = "Er zijn niet opgeslagen wijzigingen ";
+	myportal.app.translations['changes-leave-page'] = "Weet je zeker dat je deze pagina wilt verlaten? Je zult alle niet-opgeslagen wijzigingen verliezen. ";
+	myportal.app.translations['discard-draft'] = "Weet je zeker dat je autosave wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.";
+	myportal.app.translations['restore-draft'] = "Weet je zeker dat je autosave wilt herstellen? Deze actie kan niet ongedaan worden gemaakt.";
+	myportal.app.translations['add'] = "Toevoegen";
+	myportal.app.translations['added'] = "Toegevoegd";
+	myportal.app.translations['processing'] = "Verwerken...";
+	myportal.app.translations['validate'] = "Bevestig";
+	myportal.app.translations['click-to-start'] = "Start";
+	myportal.app.translations['reset-password'] = "Reset wachtwoord";
+	myportal.app.translations['operation-completed-successfully'] = "Actie succesvol afgerond";
+	myportal.app.translations['points'] = "punten";
+	myportal.app.translations['badges'] = "badges";
+	myportal.app.translations['help-videos-unavailable'] = "Videos op dit moment niet beschikbaar";
+	myportal.app.translations['next'] = "Volgende";
+	myportal.app.translations['previous'] = "Vorige";
+	myportal.app.translations['your-rating'] = "Je beoordeling";
+	myportal.app.translations['reset-your-rating'] = "Rating resetten";
+	myportal.app.translations['creating-export'] = "Exportbestand wordt gemaakt. Even geduld..";
+	myportal.app.translations['no-results-found'] = "Geen resultaten gevonden. Probeer opnieuw.";
+	myportal.app.translations['login'] = "Login";
+	myportal.app.translations['crop'] = "Bijsnijden";
+	myportal.app.translations['apply'] = "Toepassen";
+	myportal.app.translations['preview-certification-error'] = "Er is een fout opgetreden bij het genereren van het voorbeeld, probeer het later opnieuw";
+	myportal.app.translations['preview'] = "Voorbeeld ";
+	myportal.app.translations['wait-preview-generation'] = "Even geduld terwijl het voorbeeld geladen wordt";
+	myportal.app.translations['youtube'] = 'YouTube';
+	myportal.app.translations['uploaded-video'] = 'Opgeladen video';
+	myportal.app.translations['days'] = 'dagen';
+	myportal.app.translations['pick-an-expiration-date'] = 'Kies een vervaldatum';
+	myportal.app.translations['duration'] = 'Duur';
+	myportal.app.translations['start-date'] = 'Startdatum';
+	myportal.app.translations['expiration-date'] = 'Vervaldatum';
+	myportal.app.translations['time-limit'] = 'Tijdslimiet';
+	myportal.app.translations['start-date-and-time-limit'] = 'Startdatum en Tijdslimiet';
+	myportal.app.translations['dtable-error'] = 'Actie uitvoeren mislukt (operatie time-out)';
+	myportal.app.translations['generic-error'] = 'Oeps, er is iets misgegaan! Probeer om de pagina te vernieuwen ';
+
+	var isMobile = false;
+	var isRtl = false;
+	var general_css = 'https://it1education.talentlms.com/index/css/fmt:1721818052,tn:53,tv:69,ct:1';
+	var editorMaxUploadSize = '10485760';
+	var editorFormattedMaxUploadSize = '10 MB';
+	var editorAcceptedFileTypes = 'gif|jpg|jpeg|png';
+	var editorFormattedAcceptedFileTypes = 'gif, jpg, jpeg, png';
+	var imageAcceptedFileTypes = 'gif|jpg|jpeg|png';
+	var imageMaxUploadSize = '3145728';
+	
+	var courseImageCanvasSizeWidth = '120';
+	var courseImageCanvasSizeHeight = '80';
+	
+	var datepickerFormat = 'dd/mm/yyyy';
+	var showSelect2 = true;
+	var currentUserId = "208";
+	var currentUserName = "Lennert Van Hoyweghen";
+	var currentUserEmail = "lennertvhoy@gmail.com";
+	var currentUserCreatedOn = "1700214194";
+		var currentUserIntercomHash = '1fca77e0681fa80a45e993ebff1de2fc5d0bf8e6d7b39ae5b8ef1baabf261f8b';
+	var myToken = "24b7fdd82bcd3a6e43c93c467352b53b";
+	var myEffectiveDomain = 'it1education.talentlms.com';
+	var myAdminDomain = '';
+	var gridExportChunkSize = 5000;
+	var gridExportProgressThreshold = 100;
+	var isDummy = false;
+	var sessionMaxLifeTime = 10800;
+	var checkSessionExpirationUrl = 'https://it1education.talentlms.com/index/checksessionexpiration';
+	var logourRedirectUrl = '';
+	var reloginRedirectUrl = 'https://it1education.talentlms.com/learner/courseinfo/id:626';
+	var enableRelogin = true;
+	var currency = '&euro;';
+	</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		if($('.tl-title-link').length){
+			if(parseInt($('.tl-title').css('height')) < 50) {
+				$('.tl-title-link').addClass('tl-title-link-default');
+			}
+			$('.tl-title-link').show();
+		}
+	});
+</script>
+
+	<script type="text/javascript">$(document).ready(function(){
+if ($("#tl-dynamic-tree").length){
+$("#tl-dynamic-tree").dynatree("getRoot")
+.visit(function(node){ node.expand(false);});}});
+
+$(document).ready(function () {
+      $('input[type=text],textarea').bind('copy paste', function (e) {
+         e.preventDefault();
+      });
+   });
+
+var heading = 'Website IT1';
+var text = 'Ga naar de website van it1';
+var link = 'https://www.it1.be';
+var iconClass = 'icon-info-circle';
+var append = '<div class="tl-icons-block" onclick="window.open(\''+link+'\')">';
+append += '<span class="tl-icon-stack"><i class="icon-circle tl-icon-stack-background">';
+append +='</i><i class="tl-icon-stack-content '+iconClass+'"></i></span>';
+append += '<div class="tl-icon-label"><div class="tl-ellipsis tl-bold-link">';
+append +='<a title="'+heading+'">'+heading+'</a></div><div>'+text+'</div></div>';
+append += '</div>';
+var $sidebar = $('.tl-body .tl-learner-dashboard-box .tl-content-sidebar');
+$sidebar.find('.tl-icons-block').last().after(append);</script><script type="text/javascript">
+		window.getTestIdAttr = function () {
+		return window.testIDAttr || "";
+	};
+	window.printTestId = function ( testID ) {
+		if ( window.testEnvActive && ( typeof testID !== 'undefined' ) ) {
+			return window.getTestIdAttr() + '=' + testID;
+		} else {
+			return '';
+		}
+	};
+	jQuery.fn.printTestId = function ( testID ) {
+	    var el = $(this[0]);
+		if ( window.testEnvActive && ( typeof testID !== 'undefined' ) ) {
+			el.attr(window.getTestIdAttr(), testID);
+		}
+	    return this;
+	};
+</script>
+
+
+
+
+<ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;" unselectable="on"></ul><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

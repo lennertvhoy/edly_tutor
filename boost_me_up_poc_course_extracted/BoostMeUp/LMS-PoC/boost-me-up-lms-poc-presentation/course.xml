@@ -1,0 +1,6 @@
+<course url_name="boost-me-up-lms-poc-presentation" org="BoostMeUp" course="LMS-PoC" display_name="Boost Me Up LMS PoC Presentation">
+    <chapter url_name="introduction">
+        <sequential url_name="overview">
+        </sequential>
+    </chapter>
+</course>
